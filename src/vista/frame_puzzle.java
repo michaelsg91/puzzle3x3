@@ -11,7 +11,6 @@ public class frame_puzzle extends JFrame{
 	public botones bi;
 	public movimientos mov;
 	public accion_clic ac;
-	public accion_boton bot;
 	public tiempo ti;
 	public accion_automatico accion_auto;
 	public frame_puzzle(){
@@ -19,7 +18,6 @@ public class frame_puzzle extends JFrame{
 		bi=new botones();
 		mov=new movimientos();
 		ac=new accion_clic(this);
-		bot=new accion_boton(this);
 		ti=new tiempo();
 		accion_auto=new accion_automatico(this);
 		
@@ -42,7 +40,7 @@ public class frame_puzzle extends JFrame{
         
         setLocationRelativeTo(null);
         puz.addMouseListener(ac);
-        bi.iniciar.addActionListener(bot);
+
                 
         bi.auto.addActionListener(accion_auto);
         

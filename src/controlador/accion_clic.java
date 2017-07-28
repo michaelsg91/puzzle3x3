@@ -40,7 +40,7 @@ public class accion_clic extends MouseAdapter{
         }
         puzzle.repaint();
     
-        //verifica();
+        verifica();
 	}
 	
 	public void verifica(){
