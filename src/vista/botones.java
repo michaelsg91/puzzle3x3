@@ -6,7 +6,7 @@ import java.awt.*;
 public class botones extends JPanel{
 	public JButton iniciar,salir,auto;
 	public botones(){
-		setPreferredSize(new Dimension(270,150));
+		setPreferredSize(new Dimension(170,130));
 		setLayout(null);
 		
 		iniciar=new JButton("Empezar Juego");

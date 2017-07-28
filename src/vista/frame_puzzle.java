@@ -12,22 +12,21 @@ public class frame_puzzle extends JFrame{
 	public movimientos mov;
 	public accion_clic ac;
 	public tiempo ti;
-	public accion_automatico accion_auto;
+	public accionBotones accion_auto;
 	public frame_puzzle(){
 		puz=new puzzle8();
 		bi=new botones();
 		mov=new movimientos();
 		ac=new accion_clic(this);
 		ti=new tiempo();
-		accion_auto=new accion_automatico(this);
+		accion_auto=new accionBotones(this);
 		
 		JPanel izq=new JPanel();
 		izq.setLayout(new BoxLayout(izq, BoxLayout.Y_AXIS));
 		izq.add(bi);
-		JPanel der=new JPanel();
-		der.setLayout(new BoxLayout(der, BoxLayout.Y_AXIS));
-		der.add(mov);
-		der.add(ti);
+		izq.add(mov);
+		izq.add(ti);
+		
 		
 		setTitle("Puzzle 8");
         setResizable(false);
@@ -35,14 +34,13 @@ public class frame_puzzle extends JFrame{
         pack();
         add(izq,BorderLayout.WEST);
         pack();
-        add(der,BorderLayout.EAST);
-        pack();
         
         setLocationRelativeTo(null);
         puz.addMouseListener(ac);
 
                 
         bi.auto.addActionListener(accion_auto);
+        bi.iniciar.addActionListener(accion_auto);
         
         		
 	}

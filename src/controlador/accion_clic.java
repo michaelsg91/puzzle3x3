@@ -1,16 +1,12 @@
 package controlador;
-import javax.swing.*;
-import vista.*;
-import vista.frame_puzzle;
 
+import vista.frame_puzzle;
 import java.awt.event.*;
-import java.io.*;
-import java.util.Random;
+
 
 public class accion_clic extends MouseAdapter{
 	frame_puzzle puzzle;
-	public int pos0,ale,tieh,tiem,ties;
-	private Random rand=new Random();
+	public int pos0,fo=0;
 	
 	public accion_clic(frame_puzzle puzzle){
 		this.puzzle=puzzle;
@@ -35,8 +31,10 @@ public class accion_clic extends MouseAdapter{
             puzzle.puz.cajas[puzzle.puz.pos_vacia] = puzzle.puz.cajas[pos_clic];
             puzzle.puz.cajas[pos_clic] = 0;
             puzzle.puz.pos_vacia = pos_clic;
+            
             puzzle.puz.con++;
             puzzle.mov.tmov.setText(""+puzzle.puz.con);
+            
         }
         puzzle.repaint();
     
@@ -46,29 +44,15 @@ public class accion_clic extends MouseAdapter{
 	public void verifica(){
 		for(int i=0;i<puzzle.puz.cajas.length;i++){
             if(puzzle.puz.cajas[i]==puzzle.puz.gana[i]){
-            	puzzle.puz.fo++;                	
-            	}            
+            	fo++;                	
+            }            
         }
-            if(puzzle.puz.fo==9){
-            	tieh=puzzle.ti.hor;
-    			tiem=puzzle.ti.min;
-    			ties=puzzle.ti.seg;
-            	            	   			
-       
-            	if(puzzle.puz.con==1){
-            		JOptionPane.showMessageDialog(null, "¡Felicitaciones! has ganado\nLo has logrado en "+puzzle.puz.con+" movimiento"
-            				+ "\nEn un tiempo de "+tieh+"H-"+tiem+"M-"+ties+"S","GANASTE",1);            	
-            	}else{
-            		JOptionPane.showMessageDialog(null, "¡Felicitaciones! has ganado\nLo has logrado en "+puzzle.puz.con+" movimientos"
-            				+ "\nEn un tiempo de "+tieh+"H-"+tiem+"M-"+ties+"S","GANASTE",1);
-            	}
-            	         	
-            	puzzle.mov.tmov.setText(""+puzzle.puz.con);
-            	          	
-            	puzzle.ti.reiniciar();
+            if(fo==9){                				
+            	puzzle.mov.tmov.setText(""+puzzle.puz.con);            	          	
+            	puzzle.ti.parar();
             	
             }
-        puzzle.puz.fo=0;
+        fo=0;
 	}
 
 }

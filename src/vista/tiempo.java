@@ -7,10 +7,10 @@ public class tiempo extends JPanel implements Runnable{
 	public Thread hilo;
 	public JLabel nseg,nmin,nhor,tseg,tmin,thor,pun1,pun2;
 	public byte seg,min,hor;
+	private boolean b=false;
 	public tiempo(){
-		setPreferredSize(new Dimension(260, 80));
+		setPreferredSize(new Dimension(170, 90));
 		setLayout(null);
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Tiempo"));
 		
 		nseg=new JLabel("S");
 		nmin=new JLabel("M");
@@ -23,14 +23,14 @@ public class tiempo extends JPanel implements Runnable{
 		
 		
 		
-		nhor.setBounds(85, 20, 30, 30);		
-		nmin.setBounds(115, 20, 30, 30);
-		nseg.setBounds(145, 20, 30, 30);
-		thor.setBounds(85, 50, 30, 30);		
-		tmin.setBounds(115, 50, 30, 30);
-		tseg.setBounds(145, 50, 30, 30);
-		pun1.setBounds(115, 50, 5, 30);
-		pun2.setBounds(145, 50, 5, 30);
+		nhor.setBounds(35, 20, 30, 30);		
+		nmin.setBounds(65, 20, 30, 30);
+		nseg.setBounds(95, 20, 30, 30);
+		thor.setBounds(35, 50, 30, 30);		
+		tmin.setBounds(65, 50, 30, 30);
+		tseg.setBounds(95, 50, 30, 30);
+		pun1.setBounds(65, 50, 5, 30);
+		pun2.setBounds(95, 50, 5, 30);
 		
 		nhor.setHorizontalAlignment(JLabel.CENTER);
 		nmin.setHorizontalAlignment(JLabel.CENTER);
@@ -46,14 +46,16 @@ public class tiempo extends JPanel implements Runnable{
 	}
 	
 	public void iniciar(){
-		seg++;
-		if(seg==60){
-			seg=0;
-			min++;
-		}
-		if(min==60){
-			min=0;
-			hor++;
+		if(b){
+			seg++;
+			if(seg==60){
+				seg=0;
+				min++;
+			}
+			if(min==60){
+				min=0;
+				hor++;
+			}
 		}
 		
 		thor.setText(""+hor);
@@ -64,7 +66,11 @@ public class tiempo extends JPanel implements Runnable{
 		seg=0;
 		min=0;
 		hor=0;
+		b=true;
 		
+	}
+	public void parar(){
+		b=false;
 	}
 	public void run(){
 		Thread ct=Thread.currentThread();

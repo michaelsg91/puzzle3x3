@@ -7,7 +7,7 @@ import javax.swing.*;
 public class puzzle8 extends JPanel implements Runnable{
 	public final static byte num_cajas = 8;
 	public final static byte lado = 3;
-    public int con=0,fo=0;
+    public int con=0;
  
     public int[] cajas = new int[num_cajas+ 1];
     public int[] gana = new int[num_cajas+ 1];
@@ -15,15 +15,15 @@ public class puzzle8 extends JPanel implements Runnable{
     public int tam_caja, pos_vacia, tam_cua,pos_gan;
     
     public Thread hilo;
-    public int cont=0,cant;
+    public int cant=0;
 	public int[][] matriz_ini;
 	public int[][] matriz_sol;
 	public nodo inicia,sol,copia;
 	public int[][] matriz=new int[3][3];
     LinkedList<int[][]> matr=new LinkedList<int[][]>();
-    LinkedList<int[][]> matr_copia=new LinkedList<int[][]>();
-    public int[] num;
-    public boolean b,c;
+    //LinkedList<int[][]> matr_copia=new LinkedList<int[][]>();
+    //public int[] num;
+    public boolean b;
     
  
     public puzzle8() {
@@ -48,10 +48,10 @@ public class puzzle8 extends JPanel implements Runnable{
         inicial[2]=3;
         inicial[3]=4;
         inicial[4]=5;
-        inicial[5]=0;
+        inicial[5]=6;
         inicial[6]=7;
         inicial[7]=8;
-        inicial[8]=6;
+        inicial[8]=0;
         
         
         barajar(inicial);
@@ -161,15 +161,12 @@ public class puzzle8 extends JPanel implements Runnable{
 		cajas[7]=matriz[2][1];
 		cajas[8]=matriz[2][2];
 		
-		cont++;
-		
 		repaint();
 		
 		System.out.println("hilo");
 		
 		if(matr.isEmpty()){
 			b=false;
-			cont=0;
 			System.out.println("terminado");
 			barajar(cajas);
 		}
@@ -194,6 +191,7 @@ public class puzzle8 extends JPanel implements Runnable{
 	}
 	
 	public void comprueba(){
+		cant=0;
 		inicia=new nodo(matriz_ini);		
 		sol=buscar_solucion(inicia, matriz_sol);
 		copia=sol;
@@ -204,17 +202,19 @@ public class puzzle8 extends JPanel implements Runnable{
 		sol=copia;
 		while(sol.padre!=null){
 			matr.add(sol.get_estado());
-			matr_copia.add(sol.get_estado());
+			//matr_copia.add(sol.get_estado());
 			sol=sol.padre;
 			cant++;
 		}
 		matr.add(matriz_ini);
-		matr_copia.add(matriz_ini);
-		num_cambia(matr_copia);
+		
+		//matr_copia.add(matriz_ini);
+		//num_cambia(matr_copia);
 		b=true;
+		
 	}
 	
-	public void num_cambia(LinkedList<int[][]> matr_copia){
+	/*public void num_cambia(LinkedList<int[][]> matr_copia){
 		int[][] matr1=new int[3][3];
 		int[][] matr2=new int[3][3];
 		num=new int[matr_copia.size()-1];
@@ -239,7 +239,7 @@ public class puzzle8 extends JPanel implements Runnable{
 		}
 		
 		
-	}
+	}*/
 	
 		
 	public nodo buscar_solucion(nodo inicio,int[][] solucion){
@@ -247,18 +247,15 @@ public class puzzle8 extends JPanel implements Runnable{
 		ArrayList<nodo> visitados=new ArrayList<nodo>();
 		expandidos.add(inicio);
 		b=false;
-		c=false;
-		cont=0;
 		while(expandidos.size()!=0){
 			nodo revisar=expandidos.remove(0);
-			imprimir_estado(revisar.get_estado());
+			//imprimir_estado(revisar.get_estado());
 			int[] pcero=ubicar_pcero(revisar.get_estado());
 			
 			//area.append(" Iteración número: "+ (cont++) +"\n");
 			
 			if(Arrays.deepEquals(revisar.get_estado(),solucion)){
-				System.out.println(" ******Solución encotrada*******");
-				c=true;
+				//System.out.println(" ******Solución encotrada*******");
 				return revisar;
 			}
 			
@@ -351,14 +348,14 @@ public class puzzle8 extends JPanel implements Runnable{
 		}
 		return posicion;
 	}		
-	public void imprimir_estado(int[][] estado){
+	/*public void imprimir_estado(int[][] estado){
 		for(int i=0;i<estado.length;i++){
 			for(int j=0;j<estado.length;j++){
 				//area.append(" ["+estado[i][j]+"]");					
 			}
 	//		area.append("\n");				
 		}
-	}
+	}*/
     
     
     
